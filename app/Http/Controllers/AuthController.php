@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     public function login()
     {
-        return view('authentification.login');
+        return view('authentication.login');
     }
 
-    public function submit()
+    public function submit(Request $request)
     {
-        dd("e");
-        return 'Login submit';
+        $user = User::where('name', $request->username)->first();
+
+        if ($user && Hash::check($request->password, $user->password)) {
+            return 'Login successful.';
+        }
+        return 'Login failed.';
     }
 }
