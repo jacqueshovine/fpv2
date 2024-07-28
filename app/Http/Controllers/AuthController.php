@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -16,11 +16,20 @@ class AuthController extends Controller
 
     public function submit(Request $request)
     {
-        $user = User::where('name', $request->username)->first();
+        $credentials = $request->validate([
+            'name' => ['required', 'min:2'],
+            'password' => ['required'],
+        ]);
 
-        if ($user && Hash::check($request->password, $user->password)) {
-            return 'Login successful.';
+        if (Auth::attempt($credentials)) {
+            // Prevent session fixation attacks
+            $request->session()->regenerate();
+ 
+            return redirect()->intended('user.profile');
         }
-        return 'Login failed.';
+ 
+        return back()->withErrors([
+            'name' => 'The provided credentials do not match our records.',
+        ])->onlyInput('name');
     }
 }
