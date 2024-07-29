@@ -1,11 +1,11 @@
 @extends('layout')
 
 @section('title')
-  {{ $user->name . ' \'s profile' }}
+  {{ $user->name . '\'s profile' }}
 @endsection
 
 @section('content')
-    <div class="container mx-auto py-16">
+    <div class="container  py-16">
         <p>Welcome, {{ $user->name }}</p>
         <form method="POST" action="{{ route('logout') }}">
             @csrf

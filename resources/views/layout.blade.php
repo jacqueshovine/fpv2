@@ -8,7 +8,7 @@
 </head>
 <body class="flex flex-col min-h-screen">
   <header class="bg-gray-800 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl  px-4 sm:px-6 lg:px-8">
       <h1 class="text-3xl font-bold underline py-4">Free potatoes</h1>
       <nav>
         <ul class="flex space-x-4">

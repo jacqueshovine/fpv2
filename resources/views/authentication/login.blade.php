@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container mx-auto py-16" >
+<div class="container  py-16" >
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="{{ route('login.submit') }}">
       @csrf
       <div class="mb-4">
